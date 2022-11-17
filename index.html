@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <link href="./daisyui.css" rel="stylesheet" type="text/css" />
+  <script src="./tailwind.js"></script>
+  <link href="./styles.css" rel="stylesheet">
+  <title>RSA Key Generator</title>
+</head>
+
+<body>
+  <main class="min-h-screen flex flex-col items-center flex-grow bg-white">
+    <div class="grid grid-cols-1 w-3/4">
+      <div>
+        <div class="mx-auto pt-12">
+          <h1 class="text-3xl font-bold">Generate</h1>
+        </div>
+
+        <div class="overflow-x-auto py-2">
+          <p id="info">You can generate an RSA PKCS#8 private key with the help of this tool. In addition, it will
+            display the
+            public key of the generated or pasted private key.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-x-8 w-2/4 py-2">
+          <div>
+            <select id="select-bits" class="select select-bordered">
+              <option value="2048">2048 bit</option>
+              <option value="4096">4096 bit</option>
+            </select>
+          </div>
+          <div class="col-span-2 pl-4">
+            <button id="generate-keys-button" class="btn bg-blue-500 text-s normal-case border-inherit">Generate Key
+              Pair</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 w-3/4 gap-x-4 py-4">
+      <div class="flex flex-col gap-y-2">
+        <div>
+          <h2 class="text-2xl font-bold">Private Key</h2>
+        </div>
+        <div class="grow">
+          <textarea id="private-key-text-area" class="textarea textarea-bordered w-full h-full"
+            placeholder="Paste private key here or click 'Generate Key Pair'"></textarea>
+        </div>
+        <div class="grid grid-cols-3 gap-x-2">
+          <button id="private-key-copy-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
+            disabled>COPY</button>
+          <button id="private-key-save-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
+            disabled>SAVE</button>
+        </div>
+        <div>
+          <p id="private-key-text-area-tooltip" class="text-green-500">ㅤ</p>
+        </div>
+      </div>
+      <div class="h-80 flex flex-col flex-grow gap-y-2">
+        <div>
+          <h2 class="text-2xl font-bold">Public Key</h2>
+        </div>
+        <div class="grow">
+          <textarea id="public-key-text-area" class="textarea textarea-bordered w-full h-full" disabled></textarea>
+        </div>
+        <div class="grid grid-cols-3 gap-x-2">
+          <button id="public-key-copy-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
+            disabled>COPY</button>
+          <button id="public-key-save-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
+            disabled>SAVE</button>
+        </div>
+        <div>
+          <p id="public-key-text-area-tooltip" class="text-green-500">ㅤ</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
+
+</html>

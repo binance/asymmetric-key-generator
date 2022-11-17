@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'SFProDisplay-Bold';
+    src: url('assets/fonts/SFProDisplay-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'SFProDisplay-Regular';
+    src: url('assets/fonts/SFProDisplay-Regular.ttf');
+}
+
+
+h1,
+h2 {
+    font-family: SFProDisplay-Bold;
+}
+
+p,
+button,
+select,
+textarea,
+input {
+    font-family: SFProDisplay-Regular;
+}
