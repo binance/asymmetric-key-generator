@@ -3,7 +3,6 @@ const { notarize } = require('@electron/notarize')
 
 const config = {
   appId: 'rsa-key-generator',
-  icon: 'resources/icon.png',
   productName: 'RSAKeyGenerator',
   mac: {
     target: {

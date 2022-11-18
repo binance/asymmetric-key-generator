@@ -1,9 +1,13 @@
 # CHANGELOG
 
+## v0.3.0
+- Restructured files
+- Added error message on not saved key
+
 ## v0.2.0
-- Fix the an error in Mac when reopen the windows
-- Allow to generate `2048` and `4096` bits keys
-- Better handling download Dialog.
+- Fixed an error in macOS for when the window is reopened
+- Allow only `2048` and `4096` bits keys generation
+- Improved the handling of download dialog.
 
 ## v0.1.1
 - First release
