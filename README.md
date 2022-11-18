@@ -1,26 +1,56 @@
 # RSA Key Generator
 
-This simple tool can be used for generating RSA Keys.
+This simple tool can be used to generate an RSA PKCS#8 key pair (private and public key).
 
+There's two methods to run the tool, you can either download or build from source code.
 
-## Save
-TODO
+## Download
+Prebuild apps can be found in [Releases](https://github.com/binance/rsa-key-generator/releases).
 
-## Run from code
+To verify the package's integrity, download both the app and the checksum file to the same directory:
 
+```shell
+-rw-r--r--@  1 john  staff   156M 18 Nov 17:02 RSAKeyGenerator-0.3.0-universal.dmg
+-rw-r--r--@  1 john  staff   102B 18 Nov 19:01 RSAKeyGenerator-0.3.0-universal.dmg.CHECKSUM
+```
 
-## How to use
+Then run sha256 checksum:
 
-1. Open the app
+```shell
+sha256sum -c RSAKeyGenerator-0.3.0-universal.dmg.CHECKSUM
+```
 
-2. Choose the bits; Recommend to keep the default value (`2048`), then click the button `Generate Key Pair`
+If it passes the integrity check, it'll return `RSAKeyGenerator-0.3.0-universal.dmg: OK`
 
-3. Below on the left column is the `Private Key`, which should be saved in your local storage; It should never be shared with anyone. Click `Save` to save in security location.
+## Build from source code
 
-4. The right column is the `Public Key`. Click `Save` button to save into local storage. This key is shared with others to sign, which can be verified with your `Private Key`.
+Obtain the source code locally and go through the following steps: 
 
-## Contributing
-Contributions are welcome.
+```javascript
+
+// install package
+npm install
+
+// run locally
+npm run start
+
+// build packages locally into the "dist" folder.
+npm run dist
+
+```
+
+## Usage
+
+1. Open the app;
+
+2. Choose the bits size; Recommend to keep the default value (`2048`), then click the button `Generate Key Pair`;
+
+3. Below on the left column is the `Private Key`, which should be stored in a secure location on your local disk (by using the `Save` button) and must never be shared with anyone;
+
+4. The right column is the `Public Key`. Click `Save` button to save into local disk. This key can be shared with others to verify the `Private Key` signed data;
+
+## Contribution
+Contributions are welcome!
 If you've found a bug within this project, please open an issue to discuss what you would like to change.
 
 ## License

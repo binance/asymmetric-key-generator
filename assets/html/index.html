@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html data-theme="light">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-  <link href="./daisyui.css" rel="stylesheet" type="text/css" />
-  <script src="./tailwind.js"></script>
-  <link href="./styles.css" rel="stylesheet">
+  <link href="../css/daisyui.css" rel="stylesheet" type="text/css" />
+  <script src="../js/tailwind.js"></script>
+  <link href="../css/styles.css" rel="stylesheet">
   <title>RSA Key Generator</title>
 </head>
 
@@ -56,7 +55,7 @@
             disabled>SAVE</button>
         </div>
         <div>
-          <p id="private-key-text-area-tooltip" class="text-green-500">ㅤ</p>
+          <p id="private-key-text-area-tooltip">ㅤ</p>
         </div>
       </div>
       <div class="h-80 flex flex-col flex-grow gap-y-2">
@@ -73,13 +72,13 @@
             disabled>SAVE</button>
         </div>
         <div>
-          <p id="public-key-text-area-tooltip" class="text-green-500">ㅤ</p>
+          <p id="public-key-text-area-tooltip">ㅤ</p>
         </div>
       </div>
     </div>
   </main>
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
+  <script src="../js/renderer.js"></script>
 </body>
 
 </html>

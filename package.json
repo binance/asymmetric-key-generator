@@ -1,24 +1,40 @@
 {
   "name": "rsa-key-generator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "RSA Key Generator",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mwl --config config/electron-builder.js",
+    "lint": "eslint ./src --ext .js",
+    "lint:fix": "eslint ./src --ext .js --fix",
     "postinstall": "electron-builder install-app-deps"
   },
-  "repository": "https://github.com/binance/rsa-key-generator-electron",
+  "repository": "https://github.com/binance/rsa-key-generator",
   "author": {
     "name": "Binance",
-    "email": "contract@binance.com",
+    "email": "contact@binance.com",
     "url": "https://www.binance.com"
   },
   "license": "MIT",
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
-    "electron": "^21.2.3",
-    "electron-builder": "^23.6.0"
+    "electron": "^21.3.0",
+    "electron-builder": "^23.6.0",
+    "eslint": "^8.27.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1"
+  },
+  "dependencies": {
+    "electron-util": "^0.17.2"
+  },
+  "overrides": {
+    "electron": {
+      "@electron/get": "^2.0.2"
+    },
+    "minimatch@<3.0.5": ">=3.0.5"
   }
 }
