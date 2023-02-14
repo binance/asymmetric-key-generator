@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.3.1
+- Fix tooltip on canceled save
+- Update dependencies
+
 ## v0.3.0
 - Restructured files
 - Added error message on not saved key

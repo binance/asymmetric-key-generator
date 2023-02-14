@@ -109,6 +109,7 @@ async function saveKey (keyType, key) {
     if (!canceled) {
       try {
         fs.writeFileSync(filePath, key, 'utf-8')
+        return "Key saved"
       } catch (err) {
         return `Error. Can not save file ${filePath}`
       }

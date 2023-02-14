@@ -1,6 +1,6 @@
 {
   "name": "rsa-key-generator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "RSA Key Generator",
   "main": "src/main.js",
   "scripts": {
