@@ -54,15 +54,21 @@ const saveKey = async (input_key) => {
 
     let label_id = `${lower_input_key}-key-text-area-tooltip`
     // Display error tooltip for 5s
-    if (result) {
+    if (result.startsWith('Error')) {
         tip_color = 'text-red-500';
-    } else {
+    } else if (result) {
         tip_color = 'text-green-500';
         result = `${input_key} Key saved`;
+    } else {
+        result = ""
     }
-    document.getElementById(label_id).classList.add(tip_color);
-    document.getElementById(label_id).innerText = result;
-    setTimeout(function () { remove_label_text(label_id) }, 5000);
+
+    if (result) {
+        document.getElementById(label_id).classList.add(tip_color);
+        document.getElementById(label_id).innerText = result;
+        setTimeout(function () { remove_label_text(label_id) }, 5000);
+    }
+    
 }
 
 // Event listeners
