@@ -8,7 +8,7 @@
   <link href="../css/daisyui.css" rel="stylesheet" type="text/css" />
   <script src="../js/tailwind.js"></script>
   <link href="../css/styles.css" rel="stylesheet">
-  <title>RSA Key Generator</title>
+  <title>Key Pair Generator</title>
 </head>
 
 <body>
@@ -20,15 +20,16 @@
         </div>
 
         <div class="overflow-x-auto py-2">
-          <p id="info">You can generate an RSA PKCS#8 private key with the help of this tool. In addition, it will
+          <p id="info">You can generate private keys with the help of this tool. In addition, it will
             display the
-            public key of the generated or pasted private key.</p>
+            public key of the generated or pasted private key. The available format is PKCS#8.</p>
         </div>
-        <div class="grid grid-cols-3 gap-x-8 w-2/4 py-2">
+        <div class="grid grid-cols-3 gap-x-8 w-3/4 py-2">
           <div>
-            <select id="select-bits" class="select select-bordered">
-              <option value="2048">2048 bit</option>
-              <option value="4096">4096 bit</option>
+            <select id="select-keyType" class="select select-bordered">
+              <option value="rsa-2048">RSA (2048 bits)</option>
+              <option value="rsa-4096">RSA (4096 bits)</option>
+              <option value="ed25519">Ed25519</option>
             </select>
           </div>
           <div class="col-span-2 pl-4">

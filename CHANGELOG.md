@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v0.4.0
+- Add support for `ed25519` keys
+  
 ## v0.3.1
 - Fix tooltip on canceled save
 - Update dependencies

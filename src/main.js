@@ -11,7 +11,7 @@ const {
   GET_ALL_CHANNELS
 } = require('./shared')
 
-function createWindow () {
+function createWindow() {
   let options = {
     width: 800,
     height: 600,
@@ -49,7 +49,7 @@ function createWindow () {
 
   mainWindow.loadFile('assets/html/index.html')
 
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
@@ -66,21 +66,46 @@ app.on('window-all-closed', function () {
 })
 
 // Actions
-async function generateKeys (bits) {
-  return generateKeyPairSync('rsa', {
-    modulusLength: bits,
-    publicKeyEncoding: {
-      type: 'spki',
-      format: 'pem'
-    },
-    privateKeyEncoding: {
-      type: 'pkcs8',
-      format: 'pem'
-    }
-  })
+async function generateKeys(keyType) {
+  if (keyType === 'rsa-2048') {
+    return generateKeyPairSync('rsa', {
+      modulusLength: 2048,
+      publicKeyEncoding: {
+        type: 'spki',
+        format: 'pem'
+      },
+      privateKeyEncoding: {
+        type: 'pkcs8',
+        format: 'pem'
+      }
+    })
+  } else if (keyType === 'rsa-4096') {
+    return generateKeyPairSync('rsa', {
+      modulusLength: 4096,
+      publicKeyEncoding: {
+        type: 'spki',
+        format: 'pem'
+      },
+      privateKeyEncoding: {
+        type: 'pkcs8',
+        format: 'pem'
+      }
+    })
+  } else {
+    return generateKeyPairSync('ed25519', {
+      publicKeyEncoding: {
+        type: 'spki',
+        format: 'pem'
+      },
+      privateKeyEncoding: {
+        type: 'pkcs8',
+        format: 'pem'
+      }
+    })
+  }
 }
 
-async function generatePublicKey (privateKey) {
+async function generatePublicKey(privateKey) {
   try {
     const publickKeyObject = createPublicKey(privateKey)
     return publickKeyObject.export({ format: 'pem', type: 'spki' })
@@ -89,11 +114,11 @@ async function generatePublicKey (privateKey) {
   }
 }
 
-async function copyKey (data) {
+async function copyKey(data) {
   clipboard.writeText(data)
 }
 
-async function saveKey (keyType, key) {
+async function saveKey(keyType, key) {
   const options = {
     title: `Save ${keyType}`,
     defaultPath: keyType,
@@ -108,7 +133,7 @@ async function saveKey (keyType, key) {
   const result = await dialog.showSaveDialog(null, options).then(({ canceled, filePath }) => {
     if (!canceled) {
       try {
-        fs.writeFileSync(filePath, key, 'utf-8')
+        fs.writeFileSync(filePath, key, { encoding: "utf8", mode: 0o600 })
         return "Key saved"
       } catch (err) {
         return `Error. Can not save file ${filePath}`
