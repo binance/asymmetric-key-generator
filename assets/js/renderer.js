@@ -13,8 +13,8 @@ function remove_label_text(label_id) {
 
 // Actions
 const generateKeys = async () => {
-    bits = document.getElementById('select-bits').value
-    let { privateKey, publicKey } = await window.utils.generateKeys(parseInt(bits))
+    keyType = document.getElementById('select-keyType').value
+    let { privateKey, publicKey } = await window.utils.generateKeys(keyType)
     document.getElementById('private-key-text-area').value = privateKey
     document.getElementById('public-key-text-area').value = publicKey
 

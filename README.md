@@ -1,6 +1,6 @@
-# RSA Key Generator
+# Key Pair Generator
 
-This simple tool can be used to generate an RSA PKCS#8 key pair (private and public key).
+This simple tool can be used to generate an RSA and Ed25519 PKCS#8 key pairs (private and public key).
 
 There's two methods to run the tool, you can either download or build from source code.
 
@@ -43,7 +43,7 @@ npm run dist
 
 1. Open the app;
 
-2. Choose the bits size; Recommend to keep the default value (`2048`), then click the button `Generate Key Pair`;
+2. Choose the key type; Recommend to keep the default value (` RSA 2048`), then click the button `Generate Key Pair`;
 
 3. Below on the left column is the `Private Key`, which should be stored in a secure location on your local disk (by using the `Save` button) and must never be shared with anyone;
 
