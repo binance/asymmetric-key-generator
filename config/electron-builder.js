@@ -2,8 +2,8 @@ const os = require('os')
 const { notarize } = require('@electron/notarize')
 
 const config = {
-  appId: 'rsa-key-generator',
-  productName: 'RSAKeyGenerator',
+  appId: 'asymmetric-key-generator',
+  productName: 'AsymmetricKeyGenerator',
   mac: {
     target: {
       target: 'dmg',
@@ -35,7 +35,7 @@ const config = {
     const appName = context.packager.appInfo.productFilename;
 
     return await notarize({
-      appBundleId: 'com.binance.RSAKeyGenerator',
+      appBundleId: 'com.binance.AsymmetricKeyGenerator',
       appPath: `${appOutDir}/${appName}.app`,
       appleId: process.env.NOTARIZE_APPLE_ID,
       appleIdPassword: process.env.NOTARIZE_APPLE_PASSWORD,

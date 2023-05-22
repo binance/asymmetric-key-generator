@@ -1,7 +1,7 @@
 {
-  "name": "rsa-key-generator",
-  "version": "0.4.0",
-  "description": "Key Pair Generator",
+  "name": "asymmetric-key-generator",
+  "version": "0.5.0",
+  "description": "Asymmetric Key Generator",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -11,7 +11,7 @@
     "lint:fix": "eslint ./src --ext .js --fix",
     "postinstall": "electron-builder install-app-deps"
   },
-  "repository": "https://github.com/binance/rsa-key-generator",
+  "repository": "https://github.com/binance/asymmetric-key-generator",
   "author": {
     "name": "Binance",
     "email": "contact@binance.com",

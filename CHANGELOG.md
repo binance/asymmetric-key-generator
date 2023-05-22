@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## v0.5.0
+- Default for `ed25519` keys
+- Change app name
+
 ## v0.4.0
 - Add support for `ed25519` keys
-  
+
 ## v0.3.1
 - Fix tooltip on canceled save
 - Update dependencies
