@@ -11,7 +11,7 @@ const {
   GET_ALL_CHANNELS
 } = require('./shared')
 
-function createWindow() {
+function createWindow () {
   let options = {
     width: 800,
     height: 600,
@@ -49,7 +49,7 @@ function createWindow() {
 
   mainWindow.loadFile('assets/html/index.html')
 
-  //mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
@@ -66,7 +66,7 @@ app.on('window-all-closed', function () {
 })
 
 // Actions
-async function generateKeys(keyType) {
+async function generateKeys (keyType) {
   if (keyType === 'rsa-2048') {
     return generateKeyPairSync('rsa', {
       modulusLength: 2048,
@@ -105,7 +105,7 @@ async function generateKeys(keyType) {
   }
 }
 
-async function generatePublicKey(privateKey) {
+async function generatePublicKey (privateKey) {
   try {
     const publickKeyObject = createPublicKey(privateKey)
     return publickKeyObject.export({ format: 'pem', type: 'spki' })
@@ -114,11 +114,11 @@ async function generatePublicKey(privateKey) {
   }
 }
 
-async function copyKey(data) {
+async function copyKey (data) {
   clipboard.writeText(data)
 }
 
-async function saveKey(keyType, key) {
+async function saveKey (keyType, key) {
   const options = {
     title: `Save ${keyType}`,
     defaultPath: keyType,
@@ -133,8 +133,8 @@ async function saveKey(keyType, key) {
   const result = await dialog.showSaveDialog(null, options).then(({ canceled, filePath }) => {
     if (!canceled) {
       try {
-        fs.writeFileSync(filePath, key, { encoding: "utf8", mode: 0o600 })
-        return "Key saved"
+        fs.writeFileSync(filePath, key, { encoding: 'utf8', mode: 0o600 })
+        return 'Key saved'
       } catch (err) {
         return `Error. Can not save file ${filePath}`
       }
