@@ -1,4 +1,3 @@
-
 const CHANNEL_GENERATE_KEYS = 'generate_keys'
 const CHANNEL_GENERATE_PUBLIC_KEYS = 'generate_public_key'
 const CHANNEL_COPY_KEY = 'copy_key'
