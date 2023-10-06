@@ -1,6 +1,6 @@
 {
   "name": "asymmetric-key-generator",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Asymmetric Key Generator",
   "main": "src/main.js",
   "scripts": {
@@ -20,12 +20,12 @@
   "license": "MIT",
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
-    "electron": "^26.2.1",
+    "electron": "^26.3.0",
     "electron-builder": "^24.6.4",
-    "eslint": "^8.27.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.5.1",
+    "eslint": "^8.50.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-n": "^16.1.0",
     "eslint-plugin-promise": "^6.1.1"
   },
   "dependencies": {
