@@ -1,7 +1,7 @@
 # Asymmetric Key Generator
 
 This simple tool can be used to generate an Ed25519 PKCS#8 and RSA key pairs (private and public key).
-
+89.59
 There's two methods to run the tool, you can either download or build from source code.
 
 ## Download
