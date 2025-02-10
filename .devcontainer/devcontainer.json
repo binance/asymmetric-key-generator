@@ -1,0 +1,19 @@
+const provider = new ethers.providers.JsonRpcProvider($rpcUrl);
+
+let web3 = new Web3($rpcUrl);
+
+const provider = new ethers.providers.JsonRpcProvider($rpcUrl);
+let web3 = new Web3($rpcUrl);
+
+const contract = $contracts['HelloWorld'];
+ 
+const factory = new ethers.ContractFactory(
+  contract.abi,
+  contract.evm.bytecode,
+  provider.getSigner(),
+);
+const helloWorldContract = await factory.deploy('Hello World');
+
+const account1Signer = provider.getSigner($accounts[1]);
+const helloByAccount1 = await helloWorldContract.connect(account1Signer).get();
+helloByAccount1.setGreeting('Hello, Moon!');
