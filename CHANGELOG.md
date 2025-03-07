@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v1.0.0
+- Optional passphrase parameter
+
 ## v0.5.3
 - Update dependencies
 

@@ -24,17 +24,33 @@
             display the
             public key of the generated or pasted private key. The available format is PKCS#8.</p>
         </div>
-        <div class="grid grid-cols-3 gap-x-8 w-3/4 py-2">
-          <div>
-            <select id="select-keyType" class="select select-bordered">
+        <div class="grid grid-cols-12 gap-x-4 w-full py-2 items-center">
+          <div class="col-span-3">
+            <select id="select-keyType" class="select select-bordered w-full">
               <option value="ed25519">Ed25519</option>
               <option value="rsa-2048">RSA (2048 bits)</option>
               <option value="rsa-4096">RSA (4096 bits)</option>
             </select>
           </div>
-          <div class="col-span-2 pl-4">
-            <button id="generate-keys-button" class="btn bg-blue-500 text-s normal-case border-inherit">Generate Key
-              Pair</button>
+          <div class="col-span-6 relative">
+            <input id="passphrase-input" type="password" placeholder="Enter passphrase (optional)" 
+                   class="input input-bordered w-full pr-12">
+            <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M3 3l18 18"/>
+            </svg>
+        </button>
+          </div>
+          <div class="col-span-3">
+            <button id="generate-keys-button" class="btn bg-blue-500 text-white normal-case border-inherit w-full">
+              Generate Key Pair
+            </button>
           </div>
         </div>
       </div>
