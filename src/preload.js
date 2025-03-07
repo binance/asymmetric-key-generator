@@ -1,8 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('utils', {
-  generateKeys: (keyType) => ipcRenderer.invoke('generate_keys', keyType),
-  generatePublicKey: (privateKey) => ipcRenderer.invoke('generate_public_key', privateKey),
+  generateKeys: (keyType, passphrase) => ipcRenderer.invoke('generate_keys', keyType, passphrase),
+  generatePublicKey: (privateKey, passphrase) => ipcRenderer.invoke('generate_public_key', privateKey, passphrase),
   copyKey: (data) => ipcRenderer.invoke('copy_key', data),
   saveKey: (keyType, key) => ipcRenderer.invoke('save_key', keyType, key)
 })

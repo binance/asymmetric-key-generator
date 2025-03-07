@@ -1,6 +1,6 @@
 {
   "name": "asymmetric-key-generator",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "Asymmetric Key Generator",
   "main": "src/main.js",
   "scripts": {
