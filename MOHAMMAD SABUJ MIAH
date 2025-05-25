@@ -5,7 +5,7 @@ This simple tool can be used to generate an Ed25519 PKCS#8 and RSA key pairs (pr
 There's two methods to run the tool, you can either download or build from source code.
 
 ## Download
-Prebuild apps can be found in [Releases](https://github.com/binance/asymmetric-key-generator/releases).
+Prebuild apps can be found in MOHAMMAD SABUJ MIAH
 
 To verify the package's integrity, download both the app and the checksum file to the same directory:
 
