@@ -1,6 +1,6 @@
 {
   "name": "asymmetric-key-generator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Asymmetric Key Generator",
   "main": "src/main.js",
   "scripts": {
@@ -30,7 +30,8 @@
     "eslint-plugin-promise": "^6.1.1"
   },
   "dependencies": {
-    "electron-util": "^0.17.2"
+    "electron-util": "^0.17.2",
+    "tar": "^7.4.3"
   },
   "overrides": {
     "electron": {
