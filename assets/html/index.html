@@ -32,24 +32,29 @@
               <option value="rsa-4096">RSA (4096 bits)</option>
             </select>
           </div>
-          <div class="col-span-6 relative">
-            <input id="passphrase-input" type="password" placeholder="Enter passphrase (optional)" 
+          <div class="col-span-4 relative">
+            <input id="passphrase-input" type="password" placeholder="Passphrase (optional)" 
                    class="input input-bordered w-full pr-12">
             <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M3 3l18 18"/>
-            </svg>
-        </button>
+              <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M3 3l18 18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="col-span-2">
+            <input id="key-count" type="number" min="1" placeholder="Enter passphrase (optional)" value="1" 
+                   class="input input-bordered w-full pr-12">
+            </button>
           </div>
           <div class="col-span-3">
             <button id="generate-keys-button" class="btn bg-blue-500 text-white normal-case border-inherit w-full">
-              Generate Key Pair
+              Generate 1 Key Pair
             </button>
           </div>
         </div>
@@ -87,6 +92,8 @@
             disabled>COPY</button>
           <button id="public-key-save-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
             disabled>SAVE</button>
+            <button id="save-pair-button" class="btn btn-sm bg-blue-500 border-inherit text-xs"
+            disabled>SAVE PAIR</button>
         </div>
         <div>
           <p id="public-key-text-area-tooltip">ㅤ</p>

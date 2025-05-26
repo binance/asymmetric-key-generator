@@ -1,10 +1,11 @@
 {
   "name": "asymmetric-key-generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Asymmetric Key Generator",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "generate": "node src/cli.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mwl --config config/electron-builder.js",
     "lint": "eslint ./src --ext .js",
