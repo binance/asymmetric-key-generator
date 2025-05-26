@@ -4,6 +4,7 @@ function change_buttons_disabled_state(state) {
     document.getElementById('public-key-save-button').disabled = state
     document.getElementById('private-key-copy-button').disabled = state
     document.getElementById('private-key-save-button').disabled = state
+    document.getElementById('save-pair-button').disabled = state
 }
 
 function remove_label_text(label_id) {
@@ -79,6 +80,43 @@ const saveKey = async (input_key) => {
     
 }
 
+const savePairs = async () => {
+    let count = parseInt(document.getElementById("key-count").value);
+    keyType = document.getElementById('select-keyType').value;
+    let passphrase = document.getElementById('passphrase-input').value || undefined;
+
+    if (count > 1) {
+      result = await window.utils.savePairs([], keyType, {count, passphrase});
+    } else {
+      let privateKey = document.getElementById("private-key-text-area").value;
+      let publicKey = document.getElementById("public-key-text-area").value;
+      result = await window.utils.savePairs(
+        [{ privateKey, publicKey }],
+        keyType,
+        { count: 1, passphrase }
+      );
+    }
+  
+    let label_id = "public-key-text-area-tooltip";
+    // Display error tooltip for 5s
+    if (result.startsWith("Error")) {
+      tip_color = "text-red-500";
+    } else if (result) {
+      tip_color = "text-green-500";
+      result = count > 1 ? `${count} key pairs saved` : "Key pair saved";
+    } else {
+      result = "";
+    }
+  
+    if (result) {
+      document.getElementById(label_id).classList.add(tip_color);
+      document.getElementById(label_id).innerText = result;
+      setTimeout(function () {
+        remove_label_text(label_id);
+      }, 5000);
+    }
+  };
+
 // Event listeners
 const generateKeysButton = document.getElementById('generate-keys-button')
 generateKeysButton.addEventListener('click', function () {
@@ -109,6 +147,10 @@ const publicKeySaveButton = document.getElementById('public-key-save-button')
 publicKeySaveButton.addEventListener('click', function () {
     saveKey("Public")
 })
+const savePairButton = document.getElementById("save-pair-button");
+savePairButton.addEventListener('click', function () {
+    savePairs()
+})
 
 const togglePassword = document.getElementById("toggle-password");
 togglePassword.addEventListener("click", function () {
@@ -126,3 +168,19 @@ togglePassword.addEventListener("click", function () {
         eyeClosed.classList.remove("hidden");
     }
 });
+
+
+const keyCountInput = document.getElementById("key-count");
+
+function updateButtonLabel() {
+    const count = parseInt(keyCountInput.value, 10);
+    const isValid = !isNaN(count) && count > 0;
+    savePairButton.textContent = isValid
+      ? `SAVE ${count} PAIR${count > 1 ? "S" : ""}`
+      : "SAVE PAIR";
+      generateKeysButton.textContent = isValid
+      ? `Generate ${count} Key Pair${count > 1 ? "s" : ""}`
+      : "Generate Key Pair";
+  }
+
+keyCountInput.addEventListener("input", updateButtonLabel);

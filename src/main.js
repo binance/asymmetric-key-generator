@@ -1,19 +1,23 @@
 const { app, BrowserWindow, ipcMain, clipboard, dialog, nativeImage } = require('electron')
 const { is } = require('electron-util')
-const { generateKeyPairSync, createPublicKey, createPrivateKey } = require('crypto')
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const fsp = require('fs').promises;
+const os = require('os');
+const path = require('path');
+const tar = require('tar');
 const {
   CHANNEL_GENERATE_KEYS,
   CHANNEL_GENERATE_PUBLIC_KEYS,
   CHANNEL_COPY_KEY,
   CHANNEL_SAVE_KEY,
+  CHANNEL_SAVE_KEY_PAIRS,
   GET_ALL_CHANNELS
 } = require('./shared')
+const { generateKeys, generatePublicKey, saveKeys } = require('./generate')
 
 function createWindow () {
   let options = {
-    width: 800,
+    width: 960,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -43,7 +47,12 @@ function createWindow () {
   })
 
   ipcMain.handle(CHANNEL_SAVE_KEY, async (event, ...args) => {
-    const result = await saveKey(...args)
+    const result = await promptSaveKey(...args)
+    return result
+  })
+
+  ipcMain.handle(CHANNEL_SAVE_KEY_PAIRS, async (event, ...args) => {
+    const result = await promptSaveKeyPairs(...args)
     return result
   })
 
@@ -65,71 +74,11 @@ app.on('window-all-closed', function () {
   GET_ALL_CHANNELS.map(channel => ipcMain.removeHandler(channel))
 })
 
-// Actions
-async function generateKeys (keyType, passphrase) {
-  if (keyType === 'rsa-2048') {
-    return generateKeyPairSync('rsa', {
-      modulusLength: 2048,
-      publicKeyEncoding: {
-        type: 'spki',
-        format: 'pem'
-      },
-      privateKeyEncoding: {
-        type: 'pkcs8',
-        format: 'pem',
-        passphrase,
-        cipher: passphrase ? 'aes-256-cbc': undefined
-      }
-    })
-  } else if (keyType === 'rsa-4096') {
-    return generateKeyPairSync('rsa', {
-      modulusLength: 4096,
-      publicKeyEncoding: {
-        type: 'spki',
-        format: 'pem'
-      },
-      privateKeyEncoding: {
-        type: 'pkcs8',
-        format: 'pem',
-        passphrase,
-        cipher: passphrase ? 'aes-256-cbc': undefined
-      }
-    })
-  } else {
-    return generateKeyPairSync('ed25519', {
-      publicKeyEncoding: {
-        type: 'spki',
-        format: 'pem'
-      },
-      privateKeyEncoding: {
-        type: 'pkcs8',
-        format: 'pem',
-        passphrase,
-        cipher: passphrase ? 'aes-256-cbc': undefined
-      }
-    });
-  }
-}
-
-async function generatePublicKey (privateKey, passphrase) {
-  try {
-    const unencryptedPrivateKey = passphrase ? createPrivateKey({
-      key: privateKey,
-      passphrase
-    }): privateKey;
-    const publickKeyObject = createPublicKey(unencryptedPrivateKey)
-    return publickKeyObject.export({ format: 'pem', type: 'spki' })
-  } catch (error) {
-    if(error.code === 'ERR_OSSL_BAD_DECRYPT') return 'Wrong passphrase provided!'
-    else return ''
-  }
-}
-
 async function copyKey (data) {
   clipboard.writeText(data)
 }
 
-async function saveKey (keyType, key) {
+async function promptSaveKey (keyType, key) {
   const options = {
     title: `Save ${keyType}`,
     defaultPath: keyType,
@@ -154,4 +103,47 @@ async function saveKey (keyType, key) {
     }
   })
   return result
+}
+
+async function promptSaveKeyPairs(
+  keys = [],
+  keyType,
+  { count, passphrase } = {}
+) {
+  const options = {
+    title: `Save key pairs`,
+    defaultPath: `id_${keyType}.tar.gz`,
+    buttonLabel: "Save",
+    filters: [
+      { name: "tar.gz", extensions: ["tar.gz"] },
+      { name: "All Files", extensions: ["*"] },
+    ],
+  };
+
+  count = count || 1;
+
+  let remaining = count - keys.length;
+  if (remaining > 0) {
+    for (let i = 0; i < remaining; i++) {
+      keys.push(await generateKeys(keyType, passphrase));
+    }
+  }
+
+  const result = await dialog
+    .showSaveDialog(null, options)
+    .then(async ({ canceled, filePath }) => {
+      if (!canceled) {
+        try {
+          await saveKeys(keys, filePath);
+          return "Key pairs saved";
+        } catch (err) {
+          console.log(err);
+          return `Error. Can not save file ${filePath}`;
+        }
+      } else {
+        console.warn("Save key dialog cancelled");
+      }
+    });
+
+  return result;
 }
