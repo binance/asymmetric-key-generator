@@ -1,17 +1,17 @@
 @font-face {
-    font-family: 'SFProDisplay-Bold';
-    src: url('../fonts/SFProDisplay-Bold.ttf');
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'SFProDisplay-Regular';
-    src: url('../fonts/SFProDisplay-Regular.ttf');
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.ttf');
 }
 
 
 h1,
 h2 {
-    font-family: SFProDisplay-Bold;
+    font-family: Roboto-Bold;
 }
 
 p,
@@ -19,7 +19,7 @@ button,
 select,
 textarea,
 input {
-    font-family: SFProDisplay-Regular;
+    font-family: Roboto-Regular;
 }
 
 /* Chrome, Safari, Edge, Opera */
