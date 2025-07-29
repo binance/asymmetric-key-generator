@@ -42,7 +42,6 @@ const config = {
     }
 
     const appName = context.packager.appInfo.productFilename
-
     const dirname = __dirname;
     const tempFile = path.join(dirname, 'app-store-connect-api-key')
     fs.writeFileSync(tempFile, process.env.APP_STORE_CONNECT_API_KEY_CONTENT)
