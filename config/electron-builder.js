@@ -1,4 +1,7 @@
 const os = require('os')
+const fs = require('fs')
+const path = require('path')
+const { fileURLToPath } = require('url')
 const { notarize } = require('@electron/notarize')
 
 const config = {
@@ -16,6 +19,12 @@ const config = {
   linux: {
     target: 'AppImage'
   },
+  publish: [
+    {
+      provider: 'generic',
+      url: '',
+    },
+  ],
   afterSign: async (context) => {
     const { electronPlatformName, appOutDir } = context
     if (electronPlatformName !== 'darwin') {
@@ -23,25 +32,28 @@ const config = {
     }
 
     if (
-      !process.env.NOTARIZE_APPLE_ID ||
-      !process.env.NOTARIZE_APPLE_PASSWORD ||
-      !process.env.NOTARIZE_APPLE_TEAM_ID
+      !process.env.APP_STORE_CONNECT_API_KEY_ID ||
+      !process.env.APP_STORE_CONNECT_API_ISSUER_ID ||
+      !process.env.APP_STORE_CONNECT_API_KEY_CONTENT
     ) {
       console.log(
-        'Skip notarizing, cannot find NOTARIZE_APPLE_ID or NOTARIZE_APPLE_PASSWORD or NOTARIZE_APPLE_TEAM_ID env'
+        'Skipping notarization because APP_STORE_CONNECT_API_KEY_ID, APP_STORE_CONNECT_API_ISSUER_ID or APP_STORE_CONNECT_API_KEY_CONTENT env variables are not set',
       )
       return
     }
 
     const appName = context.packager.appInfo.productFilename
 
+    // @ts-ignore
+    const dirname = path.dirname(fileURLToPath(import.meta.url))
+    const tempFile = path.join(dirname, 'app-store-connect-api-key')
+    fs.writeFileSync(tempFile, process.env.APP_STORE_CONNECT_API_KEY_CONTENT)
+
     return await notarize({
-      appBundleId: 'com.binance.AsymmetricKeyGenerator',
       appPath: `${appOutDir}/${appName}.app`,
-      appleId: process.env.NOTARIZE_APPLE_ID,
-      appleIdPassword: process.env.NOTARIZE_APPLE_PASSWORD,
-      ascProvider: process.env.NOTARIZE_APPLE_TEAM_ID,
-      teamId: process.env.NOTARIZE_APPLE_TEAM_ID
+      appleApiKeyId: process.env.APP_STORE_CONNECT_API_KEY_ID,
+      appleApiKey: tempFile,
+      appleApiIssuer: process.env.APP_STORE_CONNECT_API_ISSUER_ID,
     })
   }
 }
