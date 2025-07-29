@@ -1,7 +1,7 @@
-import { notarize } from '@electron/notarize'
-import * as path from 'path'
-import * as fs from 'fs'
-import * as os from 'os'
+const os = require('os')
+const fs = require('fs')
+const path = require('path')
+const { notarize } = require('@electron/notarize')
 
 const config = {
   appId: 'asymmetric-key-generator',
@@ -60,4 +60,4 @@ if (os.platform() === 'win32' && process.env.WIN_CERTIFICATE_SUBJECT_NAME) {
   config.win.certificateSubjectName = process.env.WIN_CERTIFICATE_SUBJECT_NAME
 }
 
-export default config;
+module.exports = config
