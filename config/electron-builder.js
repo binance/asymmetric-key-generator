@@ -1,7 +1,7 @@
-const os = require('os')
-const fs = require('fs')
-const path = require('path')
-const { notarize } = require('@electron/notarize')
+import { notarize } from '@electron/notarize'
+import * as path from 'path'
+import * as fs from 'fs'
+import * as os from 'os'
 
 const config = {
   appId: 'asymmetric-key-generator',
