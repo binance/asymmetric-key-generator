@@ -1,7 +1,6 @@
 const os = require('os')
 const fs = require('fs')
 const path = require('path')
-const { fileURLToPath } = require('url')
 const { notarize } = require('@electron/notarize')
 
 const config = {
@@ -44,8 +43,7 @@ const config = {
 
     const appName = context.packager.appInfo.productFilename
 
-    // @ts-ignore
-    const dirname = path.dirname(fileURLToPath(import.meta.url))
+    const dirname = __dirname;
     const tempFile = path.join(dirname, 'app-store-connect-api-key')
     fs.writeFileSync(tempFile, process.env.APP_STORE_CONNECT_API_KEY_CONTENT)
 
