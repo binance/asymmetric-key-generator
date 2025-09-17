@@ -1,7 +1,6 @@
 const os = require('os')
 const fs = require('fs')
 const path = require('path')
-const { notarize } = require('@electron/notarize')
 
 const config = {
   appId: 'asymmetric-key-generator',
@@ -41,9 +40,11 @@ const config = {
       return
     }
 
+    const { notarize } = await import('@electron/notarize')
     const appName = context.packager.appInfo.productFilename
-    
-    const dirname = __dirname;
+
+    // @ts-ignore
+    const dirname = __dirname
     const tempFile = path.join(dirname, 'app-store-connect-api-key')
     fs.writeFileSync(tempFile, process.env.APP_STORE_CONNECT_API_KEY_CONTENT)
 
