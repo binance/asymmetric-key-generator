@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.1.3
+- Update dependencies
+
+## v1.1.2
+- Update font style
+- Update notarize
+- Update dependencies
+
+## v1.1.1
+- Update dependencies
+
+## v1.1.0
+- Add prompt save Key pair
+- Add Command-Line Tool option
+
 ## v1.0.0
 - Optional passphrase parameter
 
