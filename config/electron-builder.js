@@ -58,7 +58,8 @@ const config = {
 }
 
 if (os.platform() === 'win32' && process.env.WIN_CERTIFICATE_SUBJECT_NAME) {
-  config.win.certificateSubjectName = process.env.WIN_CERTIFICATE_SUBJECT_NAME
+  config.win.signtoolOptions = config.win.signtoolOptions || {};
+  config.win.signtoolOptions.certificateSubjectName = process.env.WIN_CERTIFICATE_SUBJECT_NAME;
 }
 
 module.exports = config
